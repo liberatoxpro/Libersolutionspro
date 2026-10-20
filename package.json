@@ -1,0 +1,9 @@
+{
+  "name": "liber-agro-pro",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Aplicativo web agrícola empacotado com Capacitor para iOS",
+  "scripts": { "check": "node --check app.js" },
+  "dependencies": { "@capacitor/core": "7.4.4", "@capacitor/ios": "7.4.4" },
+  "devDependencies": { "@capacitor/cli": "7.4.4" }
+}
