@@ -1,0 +1,42 @@
+name: Compilar LIBER AGRO PRO iOS
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  ios:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Preparar aplicativo
+        run: |
+          mkdir -p www
+          cp index.html app.js style.css www/
+          find . -maxdepth 1 -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.svg' \) -exec cp {} www/ \;
+          cat > capacitor.config.json <<'EOF'
+          {"appId":"com.libersolutions.agropro","appName":"LIBER AGRO PRO","webDir":"www"}
+          EOF
+          npx cap add ios
+          npx cap sync ios
+
+      - name: Compilar iOS sem assinatura
+        run: |
+          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
+          mkdir -p Payload
+          cp -R build/Build/Products/Release-iphoneos/App.app Payload/
+          zip -qr LIBER-AGRO-PRO-unsigned.ipa Payload
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: LIBER-AGRO-PRO-unsigned
+          path: LIBER-AGRO-PRO-unsigned.ipa
+  
