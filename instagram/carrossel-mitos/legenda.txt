@@ -4,17 +4,18 @@ LEGENDA
 
 O último é o que mais dá problema: contratar operação sem registro.
 
-Atendemos pequenos produtores, cooperativas, usinas e empresas florestais no Pará, Maranhão e Tocantins. Operação regularizada no MAPA e na ANAC, com aplicação conforme receituário agronômico.
+Atendemos pequenos produtores, cooperativas, usinas e empresas florestais no Pará, Tocantins e Maranhão. Mais de 15.000 hectares atendidos, com operação regularizada no MAPA e na ANAC e aplicação conforme receituário agronômico.
 
 Manda pra quem ainda acha que drone é só pra área pequena 😉
 
-📲 Orçamento no direct.
+📲 Orçamento: WhatsApp (98) 98148-0329 ou no direct.
 
 PRIMEIRO COMENTÁRIO (hashtags)
 ------------------------------
 #dronesagricolas #pulverizacaoaerea #agroPA #eucalipto #canadeacucar
 
-TROCAR O FUNDO POR FOTOS REAIS
-------------------------------
-Coloque fotos em fotos/slide-1.jpg ... fotos/slide-7.jpg e rode:
+TROCAR AS FOTOS
+---------------
+Os slides 1 e 7 usam fotos do site (instagram/marca/). Para usar fotos próprias,
+coloque fotos/slide-1.jpg e/ou fotos/slide-7.jpg e rode, na raiz do repositório:
 node instagram/carrossel-mitos/gerar.js
