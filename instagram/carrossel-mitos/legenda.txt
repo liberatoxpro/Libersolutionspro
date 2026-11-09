@@ -1,0 +1,20 @@
+LEGENDA
+-------
+5 mitos sobre pulverização com drone que ainda escuto no campo 🚁
+
+O último é o que mais dá problema: contratar operação sem registro.
+
+Atendemos pequenos produtores, cooperativas, usinas e empresas florestais no Pará, Maranhão e Tocantins. Operação regularizada no MAPA e na ANAC, com aplicação conforme receituário agronômico.
+
+Manda pra quem ainda acha que drone é só pra área pequena 😉
+
+📲 Orçamento no direct.
+
+PRIMEIRO COMENTÁRIO (hashtags)
+------------------------------
+#dronesagricolas #pulverizacaoaerea #agroPA #eucalipto #canadeacucar
+
+TROCAR O FUNDO POR FOTOS REAIS
+------------------------------
+Coloque fotos em fotos/slide-1.jpg ... fotos/slide-7.jpg e rode:
+node instagram/carrossel-mitos/gerar.js
