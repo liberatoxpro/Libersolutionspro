@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Carrossel Semeadura Florestal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070e15;--panel:#111e28;--line:#27404a;--muted:#90a8b2;--text:#ecf7f3;
+  --lime:#b8ff58;--teal:#28dfb5;--cyan:#50c9ff;--forest:#173e38;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#03070b;font-family:Inter,-apple-system,"Segoe UI",sans-serif;color:var(--text)}
+.deck{display:flex;gap:40px;padding:40px;overflow-x:auto;scroll-snap-type:x mandatory}
+.deck .slide{zoom:.42;flex:none;scroll-snap-align:start}
+body.export .deck{display:block;padding:0}
+body.export .deck .slide{zoom:1;margin:0}
+
+/* ---------- slide base ---------- */
+.slide{
+  width:1080px;height:1350px;position:relative;overflow:hidden;
+  padding:96px 88px 120px;display:flex;flex-direction:column;
+  background:
+    radial-gradient(ellipse at 85% 0%,#1d4a3e 0,transparent 45%),
+    radial-gradient(ellipse at 0% 75%,#12293a 0,transparent 45%),
+    var(--bg);
+}
+.slide::after{ /* grade sutil de mapeamento */
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;
+  background-image:linear-gradient(var(--teal) 1px,transparent 1px),linear-gradient(90deg,var(--teal) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse at 70% 20%,#000 0,transparent 70%);
+}
+.top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}
+.brand{display:flex;align-items:center;gap:16px;font-weight:800;letter-spacing:2px;font-size:22px}
+.brand img{width:52px;height:52px;object-fit:contain}
+.brand small{display:block;font-size:14px;letter-spacing:3px;color:var(--muted);font-weight:500;margin-top:4px}
+.count{font-size:22px;font-weight:700;color:var(--muted);letter-spacing:2px}
+.count b{color:var(--lime)}
+.foot{position:absolute;left:88px;right:88px;bottom:56px;display:flex;justify-content:space-between;align-items:center;z-index:2;color:var(--muted);font-size:20px;letter-spacing:1px}
+.swipe{display:flex;align-items:center;gap:12px;color:var(--lime);font-weight:700}
+.swipe svg{width:44px;height:20px}
+.dots{display:flex;gap:10px}
+.dots i{width:12px;height:12px;border-radius:50%;background:var(--line)}
+.dots i.on{background:var(--lime);width:36px;border-radius:8px}
+
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:22px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--teal);margin-bottom:28px}
+.eyebrow::before{content:"";width:40px;height:3px;background:var(--teal);border-radius:2px}
+h1,h2{font-weight:900;letter-spacing:-2px;line-height:1.02}
+h1{font-size:104px}
+h2{font-size:76px;margin-bottom:28px}
+.hl{color:var(--lime)}
+.lead{font-size:34px;line-height:1.4;color:#c9dcd6;max-width:860px}
+.content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:center}
+
+/* cards */
+.list{display:grid;gap:22px;margin-top:20px}
+.item{display:flex;gap:28px;align-items:flex-start;padding:30px 34px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(135deg,#111e28ee,#0b151dcc)}
+.ico{flex:none;width:76px;height:76px;border-radius:22px;display:grid;place-items:center;background:linear-gradient(135deg,#284c38,#14332d);border:1px solid #3b6b50}
+.ico svg{width:42px;height:42px;stroke:var(--lime);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.item h3{font-size:34px;font-weight:800;margin-bottom:8px;letter-spacing:-.5px}
+.item p{font-size:26px;line-height:1.4;color:var(--muted)}
+
+/* steps */
+.steps{display:grid;gap:0;margin-top:16px;position:relative}
+.step{display:grid;grid-template-columns:96px 1fr;gap:30px;padding:26px 0;position:relative}
+.step .n{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;font-size:40px;font-weight:900;color:#081511;background:linear-gradient(135deg,var(--lime),var(--teal));box-shadow:0 0 40px #62ed9240;position:relative;z-index:1}
+.step:not(:last-child)::before{content:"";position:absolute;left:47px;top:122px;bottom:-26px;width:2px;background:repeating-linear-gradient(var(--teal) 0 10px,transparent 10px 20px);opacity:.6}
+.step h3{font-size:36px;font-weight:800;margin:14px 0 8px}
+.step p{font-size:26px;line-height:1.4;color:var(--muted)}
+
+/* chips grid */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:20px}
+.tile{padding:34px 32px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(160deg,#122531,#0b151d);min-height:250px;display:flex;flex-direction:column;gap:14px}
+.tile .ico{width:68px;height:68px;border-radius:20px}
+.tile .ico svg{width:36px;height:36px}
+.tile h3{font-size:31px;font-weight:800;letter-spacing:-.5px;line-height:1.15}
+.tile p{font-size:23px;line-height:1.38;color:var(--muted)}
+
+/* checklist */
+.check{display:grid;gap:18px;margin-top:20px}
+.check div{display:grid;grid-template-columns:56px 1fr;gap:22px;align-items:start;font-size:29px;line-height:1.38;color:#c9dcd6;padding:22px 0;border-bottom:1px solid #1d3039}
+.check div:last-child{border-bottom:0}
+.check b{color:var(--text)}
+.check svg{width:52px;height:52px}
+
+.note{margin-top:30px;font-size:21px;color:var(--muted);line-height:1.45;border-left:3px solid var(--teal);padding-left:20px}
+
+/* cover art */
+.cover-art{position:absolute;inset:0;z-index:1}
+.cover .content{justify-content:flex-end;padding-bottom:40px}
+.tag{display:inline-block;align-self:flex-start;padding:14px 26px;border-radius:40px;border:1.5px solid var(--lime);color:var(--lime);font-weight:800;font-size:22px;letter-spacing:3px;margin-bottom:34px;background:#0b151daa}
+
+/* CTA */
+.cta .content{align-items:flex-start}
+.btn{margin-top:46px;display:inline-flex;align-items:center;gap:18px;padding:30px 46px;border-radius:24px;background:linear-gradient(135deg,var(--lime),var(--teal));color:#081511;font-weight:900;font-size:34px;box-shadow:0 0 60px #62ed9255}
+.actions{display:flex;gap:22px;margin-top:40px}
+.actions span{display:flex;align-items:center;gap:12px;padding:18px 26px;border:1px solid var(--line);border-radius:18px;font-size:24px;color:#c9dcd6;background:#111e28}
+.actions svg{width:30px;height:30px;stroke:var(--lime);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.biglogo{position:absolute;right:-120px;top:280px;width:640px;opacity:.12;z-index:1;filter:saturate(1.2)}
+</style>
+</head>
+<body>
+<main class="deck">
+
+<!-- 1 · CAPA -->
+<section class="slide cover">
+  <svg class="cover-art" viewBox="0 0 1080 1350" aria-hidden="true">
+    <defs>
+      <linearGradient id="hill1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f5a3f"/><stop offset="1" stop-color="#0b1f1a"/></linearGradient>
+      <linearGradient id="hill2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#143a30"/><stop offset="1" stop-color="#070e15"/></linearGradient>
+      <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8ff58" stop-opacity=".35"/><stop offset="1" stop-color="#b8ff58" stop-opacity="0"/></linearGradient>
+      <radialGradient id="glow"><stop offset="0" stop-color="#b8ff58" stop-opacity=".5"/><stop offset="1" stop-color="#b8ff58" stop-opacity="0"/></radialGradient>
+    </defs>
+    <!-- feixe de sementes -->
+    <polygon points="610,360 690,360 820,820 480,820" fill="url(#beam)"/>
+    <g fill="#b8ff58">
+      <circle cx="630" cy="430" r="5"/><circle cx="668" cy="470" r="4"/><circle cx="645" cy="520" r="5"/><circle cx="700" cy="560" r="4"/>
+      <circle cx="600" cy="590" r="5"/><circle cx="680" cy="630" r="5"/><circle cx="560" cy="670" r="4"/><circle cx="730" cy="690" r="4"/>
+      <circle cx="620" cy="720" r="5"/><circle cx="530" cy="760" r="4"/><circle cx="760" cy="770" r="5"/><circle cx="660" cy="790" r="4"/>
+    </g>
+    <!-- drone -->
+    <g transform="translate(650 320)">
+      <circle r="150" fill="url(#glow)"/>
+      <rect x="-210" y="-30" width="420" height="10" rx="5" fill="#27404a"/>
+      <rect x="-230" y="-48" width="120" height="8" rx="4" fill="#90a8b2"/>
+      <rect x="110" y="-48" width="120" height="8" rx="4" fill="#90a8b2"/>
+      <rect x="-175" y="-42" width="10" height="20" fill="#27404a"/><rect x="165" y="-42" width="10" height="20" fill="#27404a"/>
+      <path d="M-70 -40 h140 a20 20 0 0 1 20 20 v30 a30 30 0 0 1 -30 30 h-120 a30 30 0 0 1 -30 -30 v-30 a20 20 0 0 1 20 -20z" fill="#e8f2ee"/>
+      <rect x="-38" y="38" width="76" height="34" rx="10" fill="#b8ff58"/>
+      <path d="M-60 0 h120" stroke="#28dfb5" stroke-width="5" stroke-linecap="round"/>
+      <path d="M-50 40 l-30 50 M50 40 l30 50" stroke="#90a8b2" stroke-width="6" stroke-linecap="round"/>
+      <path d="M-100 90 h60 M40 90 h60" stroke="#90a8b2" stroke-width="6" stroke-linecap="round"/>
+    </g>
+    <!-- relevo + floresta -->
+    <path d="M0 800 C180 720 330 760 480 800 S820 760 1080 700 V1350 H0Z" fill="url(#hill1)"/>
+    <g fill="#2b7a4f">
+      <path d="M90 790 l26 -70 26 70z"/><path d="M150 778 l30 -82 30 82z"/><path d="M880 742 l28 -78 28 78z"/><path d="M950 728 l32 -90 32 90z"/><path d="M1010 716 l26 -70 26 70z"/>
+    </g>
+    <g fill="#b8ff58" opacity=".85">
+      <path d="M560 812 q8 -26 0 -40 q-8 14 0 40z"/><path d="M640 806 q8 -22 0 -34 q-8 12 0 34z"/><path d="M720 798 q8 -24 0 -38 q-8 14 0 38z"/>
+    </g>
+    <path d="M0 900 C220 840 420 900 620 910 S900 860 1080 840 V1350 H0Z" fill="url(#hill2)"/>
+    <rect y="860" width="1080" height="490" fill="url(#hill2)" opacity=".6"/>
+  </svg>
+  <div class="top">
+    <div class="brand"><img src="../../47CF89AD-2FC4-44B2-A9E5-80EE8FE61863.png" alt=""><div>LIBER AGRO PRO<small>GRUPO LIBERATO</small></div></div>
+    <div class="count"><b>01</b> / 08</div>
+  </div>
+  <div class="content">
+    <span class="tag">PARA EMPRESAS FLORESTAIS</span>
+    <h1>Semeadura<br>com <span class="hl">drone</span><br>na silvicultura</h1>
+    <p class="lead" style="margin-top:30px">Restauração e reflorestamento em escala, inclusive onde a máquina e a equipe a pé não chegam.</p>
+  </div>
+  <div class="foot"><div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="swipe">Arraste <svg viewBox="0 0 44 20"><path d="M2 10h38M32 2l8 8-8 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+</section>
+
+<!-- 2 · O DESAFIO -->
+<section class="slide">
+  <div class="top">
+    <div class="brand"><img src="../../47CF89AD-2FC4-44B2-A9E5-80EE8FE61863.png" alt=""><div>LIBER AGRO PRO<small>GRUPO LIBERATO</small></div></div>
+    <div class="count"><b>02</b> / 08</div>
+  </div>
+  <div class="content">
+    <span class="eyebrow">O desafio</span>
+    <h2>Plantar árvores em área difícil é <span class="hl">lento e caro</span></h2>
+    <div class="list">
+      <div class="item"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 20l6-10 4 6 3-4 5 8z"/></svg></div><div><h3>Relevo e acesso</h3><p>Encostas, APPs, margens de rio e áreas alagadas travam máquinas e expõem a equipe a riscos.</p></div></div>
+      <div class="item"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M17 11l4 4M21 11l-4 4"/></svg></div><div><h3>Mão de obra escassa</h3><p>Plantio manual exige equipes grandes, logística de campo e janelas curtas de chuva.</p></div></div>
+      <div class="item"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 7.5C7 5.6 9.2 4.5 12 4.5s5 1.1 5 3-2.2 2.8-5 3.5-5 1.6-5 3.5 2.2 3 5 3 5-1.1 5-3"/></svg></div><div><h3>Custo por hectare</h3><p>Produção de mudas, transporte e plantio pesam no orçamento de restauração e compensação.</p></div></div>
+    </div>
+  </div>
+  <div class="foot"><div class="dots"><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="swipe">Arraste <svg viewBox="0 0 44 20"><path d="M2 10h38M32 2l8 8-8 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+</section>
+
+<!-- 3 · COMO FUNCIONA -->
+<section class="slide">
+  <div class="top">
+    <div class="brand"><img src="../../47CF89AD-2FC4-44B2-A9E5-80EE8FE61863.png" alt=""><div>LIBER AGRO PRO<small>GRUPO LIBERATO</small></div></div>
+    <div class="count"><b>03</b> / 08</div>
+  </div>
+  <div class="content">
+    <span class="eyebrow">Como funciona</span>
+    <h2>Do mapa à <span class="hl">germinação</span></h2>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><div><h3>Mapeamento da área</h3><p>Levantamento do talhão, delimitação dos polígonos e definição das faixas de voo.</p></div></div>
+      <div class="step"><div class="n">2</div><div><h3>Preparo das sementes</h3><p>Seleção de espécies, quebra de dormência e, quando indicado, peletização ou mistura em muvuca.</p></div></div>
+      <div class="step"><div class="n">3</div><div><h3>Voo autônomo calibrado</h3><p>O drone distribui as sementes na taxa planejada, com rota gravada e área registrada.</p></div></div>
+      <div class="step"><div class="n">4</div><div><h3>Monitoramento</h3><p>Avaliação de germinação e estabelecimento para decidir ressemeadura ou manejo.</p></div></div>
+    </div>
+  </div>
+  <div class="foot"><div class="dots"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div><div class="swipe">Arraste <svg viewBox="0 0 44 20"><path d="M2 10h38M32 2l8 8-8 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+</section>
+
+<!-- 4 · VANTAGENS -->
+<section class="slide">
+  <div class="top">
+    <div class="brand"><img src="../../47CF89AD-2FC4-44B2-A9E5-80EE8FE61863.png" alt=""><div>LIBER AGRO PRO<small>GRUPO LIBERATO</small></div></div>
+    <div class="count"><b>04</b> / 08</div>
+  </div>
+  <div class="content">
+    <span class="eyebrow">Vantagens</span>
+    <h2>Por que levar a semeadura <span class="hl">para o ar</span></h2>
+    <div class="grid2">
+      <div class="tile"><div class="ico"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div><h3>Mais área por dia</h3><p>Rendimento muito superior ao plantio manual, com equipe reduzida.</p></div>
+      <div class="tile"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 20l6-10 4 6 3-4 5 8z"/><path d="M14 4h6v4"/></svg></div><h3>Acesso a qualquer relevo</h3><p>Encostas, alagados e áreas pós-incêndio sem expor pessoas.</p></div>
+      <div class="tile"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 18h16M6 18v-4m4 4v-7m4 7v-5m4 5V8"/></svg></div><h3>Solo preservado</h3><p>Sem tráfego de máquinas: menos compactação e perturbação do terreno.</p></div>
+      <div class="tile"><div class="ico"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div><h3>Rastreabilidade</h3><p>Cada voo gera registro de área, taxa e rota para auditorias e certificações.</p></div>
+    </div>
+  </div>
+  <div class="foot"><div class="dots"><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div><div class="swipe">Arraste <svg viewBox="0 0 44 20"><path d="M2 10h38M32 2l8 8-8 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+</section>
+
+<!-- 5 · ONDE APLICAR -->
+<section class="slide">
+  <div class="top">
+    <div class="brand"><img src="../../47CF89AD-2FC4-44B2-A9E5-80EE8FE61863.png" alt=""><div>LIBER AGRO PRO<small>GRUPO LIBERATO</small></div></div>
+    <div class="count"><b>05</b> / 08</div>
+  </div>
+  <div class="content">
+    <span class="eyebrow">Aplicações florestais</span>
+    <h2>Onde a semeadura aérea <span class="hl">faz diferença</span></h2>
+    <div class="list">
+      <div class="item"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 22V12M12 12c0-4 3-7 7-7 0 4-3 7-7 7zM12 15c0-3-2.5-5.5-6-5.5 0 3 2.5 5.5 6 5.5z"/></svg></div><div><h3>APP e Reserva Legal</h3><p>Recomposição exigida pelo Código Florestal e por PRADs.</p></div></div>
+      <div class="item"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3c1 3 4 4.5 4 8.5a4 4 0 0 1-8 0C8 9 10 8 10 6c1.5 1 2 2.5 2 2.5S12.5 5 12 3z"/></svg></div><div><h3>Áreas pós-incêndio e degradadas</h3><p>Retomada rápida da cobertura vegetal para conter erosão.</p></div></div>
+      <div class="item"><div class="ico"><svg viewBox="0 0 24 24"><path d="M7 20l3-6H6l4-7H8l4-5 4 5h-2l4 7h-4l3 6z"/></svg></div><div><h3>Enriquecimento e cobertura</h3><p>Adensamento de fragmentos e cobertura verde em entrelinhas de plantios.</p></div></div>
+      <div class="item"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg></div><div><h3>Compensação e carbono</h3><p>Projetos de restauração com registro georreferenciado de cada operação.</p></div></div>
+    </div>
+  </div>
+  <div class="foot"><div class="dots"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div><div class="swipe">Arraste <svg viewBox="0 0 44 20"><path d="M2 10h38M32 2l8 8-8 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+</section>
+
+<!-- 6 · FATORES DE SUCESSO -->
+<section class="slide">
+  <div class="top">
+    <div class="brand"><img src="../../47CF89AD-2FC4-44B2-A9E5-80EE8FE61863.png" alt=""><div>LIBER AGRO PRO<small>GRUPO LIBERATO</small></div></div>
+    <div class="count"><b>06</b> / 08</div>
+  </div>
+  <div class="content">
+    <span class="eyebrow">Fatores de sucesso</span>
+    <h2>O drone é a ferramenta.<br><span class="hl">O resultado vem do método.</span></h2>
+    <div class="check">
+      <div><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="#284c38"/><path d="M16 27l7 7 13-15" fill="none" stroke="#b8ff58" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Espécies certas:</b> pioneiras e nativas adaptadas, com sementes de procedência e germinação conhecida.</span></div>
+      <div><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="#284c38"/><path d="M16 27l7 7 13-15" fill="none" stroke="#b8ff58" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Época de chuva:</b> semear no início do período úmido para garantir umidade no solo.</span></div>
+      <div><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="#284c38"/><path d="M16 27l7 7 13-15" fill="none" stroke="#b8ff58" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Preparo da área:</b> controle de formigas cortadeiras e de gramíneas competidoras.</span></div>
+      <div><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="#284c38"/><path d="M16 27l7 7 13-15" fill="none" stroke="#b8ff58" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Calibração:</b> taxa, altura e faixa de voo ajustadas para cada lote de sementes.</span></div>
+    </div>
+    <p class="note">Defina o projeto com um engenheiro florestal ou agrônomo responsável.</p>
+  </div>
+  <div class="foot"><div class="dots"><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></div><div class="swipe">Arraste <svg viewBox="0 0 44 20"><path d="M2 10h38M32 2l8 8-8 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+</section>
+
+<!-- 7 · LIBER AGRO PRO -->
+<section class="slide">
+  <div class="top">
+    <div class="brand"><img src="../../47CF89AD-2FC4-44B2-A9E5-80EE8FE61863.png" alt=""><div>LIBER AGRO PRO<small>GRUPO LIBERATO</small></div></div>
+    <div class="count"><b>07</b> / 08</div>
+  </div>
+  <div class="content">
+    <span class="eyebrow">Gestão da operação</span>
+    <h2>Toda semeadura <span class="hl">documentada</span> no LIBER AGRO PRO</h2>
+    <div class="grid2">
+      <div class="tile"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg></div><h3>Clientes e talhões</h3><p>Cadastro das áreas e de cada projeto florestal.</p></div>
+      <div class="tile"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></div><h3>Semeadura e calibração</h3><p>Cálculo de insumos e registro da taxa aplicada.</p></div>
+      <div class="tile"><div class="ico"><svg viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1-.5-8A6 6 0 0 1 18 8.5a4.5 4.5 0 0 1-1 9.5z"/><path d="M9 21l1-2M13 21l1-2"/></svg></div><h3>Previsão do clima</h3><p>Planejamento das janelas de voo e de chuva.</p></div>
+      <div class="tile"><div class="ico"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div><h3>Relatórios</h3><p>Relatório da operação pronto para o cliente.</p></div>
+    </div>
+  </div>
+  <div class="foot"><div class="dots"><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i></div><div class="swipe">Arraste <svg viewBox="0 0 44 20"><path d="M2 10h38M32 2l8 8-8 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+</section>
+
+<!-- 8 · CTA -->
+<section class="slide cta">
+  <img class="biglogo" src="../../47CF89AD-2FC4-44B2-A9E5-80EE8FE61863.png" alt="">
+  <div class="top">
+    <div class="brand"><img src="../../47CF89AD-2FC4-44B2-A9E5-80EE8FE61863.png" alt=""><div>LIBER AGRO PRO<small>GRUPO LIBERATO</small></div></div>
+    <div class="count"><b>08</b> / 08</div>
+  </div>
+  <div class="content">
+    <span class="eyebrow">Próximo passo</span>
+    <h1 style="font-size:92px">Vamos semear<br>sua próxima<br><span class="hl">floresta?</span></h1>
+    <p class="lead" style="margin-top:30px">Conte sua área e seu objetivo. O Grupo Liberato monta o plano de semeadura com drone para o seu projeto.</p>
+    <div class="btn">Fale com a gente no direct
+      <svg width="40" height="20" viewBox="0 0 44 20"><path d="M2 10h38M32 2l8 8-8 8" fill="none" stroke="#081511" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="actions">
+      <span><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg>Salve</span>
+      <span><svg viewBox="0 0 24 24"><path d="M4 12l16-8-6 16-3-7z"/></svg>Compartilhe com sua equipe</span>
+    </div>
+  </div>
+  <div class="foot"><div class="dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i></div><div>Grupo Liberato · Operações aeroagrícolas</div></div>
+</section>
+
+</main>
+<script>if(new URLSearchParams(location.search).has('export'))document.body.classList.add('export');</script>
+</body>
+</html>
