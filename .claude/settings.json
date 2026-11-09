@@ -1,12 +1,19 @@
 {
   "enabledPlugins": {
-    "watch@claude-video": true
+    "watch@claude-video": true,
+    "instagram-skills@instagram-skills": true
   },
   "extraKnownMarketplaces": {
     "claude-video": {
       "source": {
         "source": "github",
         "repo": "bradautomates/claude-video"
+      }
+    },
+    "instagram-skills": {
+      "source": {
+        "source": "github",
+        "repo": "sergebulaev/instagram-skills"
       }
     }
   }
