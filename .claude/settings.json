@@ -1,0 +1,13 @@
+{
+  "enabledPlugins": {
+    "watch@claude-video": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-video": {
+      "source": {
+        "source": "github",
+        "repo": "bradautomates/claude-video"
+      }
+    }
+  }
+}
