@@ -1,0 +1,38 @@
+{
+  "duracao": 31.5,
+  "voz": "voz-take1.mp3",
+  "voz_offset": 0.15,
+  "musica": { "crescimento": 11.05, "final": 24.95 },
+  "drone": [10.6, 22.0],
+  "cortes": [
+    { "t": 1.75, "impacto": 0 },
+    { "t": 3.05, "impacto": 0.6 },
+    { "t": 4.3, "impacto": 0.7 },
+    { "t": 6.0, "impacto": 0.5 },
+    { "t": 8.05, "impacto": 0 },
+    { "t": 9.45, "impacto": 0 },
+    { "t": 11.05, "impacto": 1.0 },
+    { "t": 13.55, "impacto": 0.6 },
+    { "t": 17.05, "impacto": 0.5 },
+    { "t": 19.3, "impacto": 0 },
+    { "t": 21.95, "impacto": 0.7 },
+    { "t": 24.95, "impacto": 0 }
+  ],
+  "legendas": [
+    { "a": 0.08, "b": 1.6, "txt": "Choveu na sua *fazenda*." },
+    { "a": 2.08, "b": 4.1, "txt": "E agora... vai *plantar capim*," },
+    { "a": 4.16, "b": 5.7, "txt": "ou *controlar o mato*?" },
+    { "a": 5.99, "b": 7.8, "txt": "Cada área tem uma *necessidade*." },
+    { "a": 7.92, "b": 9.62, "txt": "E o trabalho precisa acontecer" },
+    { "a": 9.68, "b": 10.9, "txt": "na *hora certa*." },
+    { "a": 11.04, "b": 13.4, "txt": "A *Liber Drones* faz *pulverização agrícola*" },
+    { "a": 13.44, "b": 14.98, "txt": "e distribuição de *sementes*" },
+    { "a": 15.0, "b": 16.7, "txt": "e outros *sólidos* com drones." },
+    { "a": 16.96, "b": 19.55, "txt": "*Tecnologia*, *precisão* e *agilidade*" },
+    { "a": 19.6, "b": 21.7, "txt": "a serviço da sua propriedade." },
+    { "a": 21.9, "b": 22.98, "txt": "Vai *formar pasto*," },
+    { "a": 23.04, "b": 24.7, "txt": "ou precisa de uma *aplicação*?" },
+    { "a": 24.88, "b": 26.1, "txt": "Fale com a *Liber Drones*" },
+    { "a": 26.12, "b": 27.9, "txt": "e solicite seu *orçamento*." }
+  ]
+}
