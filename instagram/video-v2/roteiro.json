@@ -1,0 +1,53 @@
+{
+  "duracao": 38.0,
+  "voz_segmentos": [
+    { "arq": "voz-take1.mp3", "de": 0.0, "ate": 10.95, "em": 0.15 },
+    { "arq": "voz-take1.mp3", "de": 10.95, "ate": 16.8, "em": 11.1 },
+    { "arq": "voz-take1.mp3", "de": 16.85, "ate": 21.75, "em": 16.95 },
+    { "arq": "voz-extra.mp3", "de": 0.0, "ate": 5.4, "em": 22.0 },
+    { "arq": "voz-take1.mp3", "de": 21.8, "ate": 27.95, "em": 27.55 },
+    { "arq": "voz-extra.mp3", "de": 5.62, "ate": 7.6, "em": 33.9 }
+  ],
+  "voz_offset": 0,
+  "musica": { "crescimento": 11.05, "final": 30.55 },
+  "drone": [10.6, 21.9],
+  "cortes": [
+    { "t": 0.22, "impacto": 1.0 },
+    { "t": 1.75, "impacto": 0 },
+    { "t": 3.05, "impacto": 0.6 },
+    { "t": 4.3, "impacto": 0.7 },
+    { "t": 6.0, "impacto": 0.5 },
+    { "t": 8.05, "impacto": 0 },
+    { "t": 9.45, "impacto": 0 },
+    { "t": 11.05, "impacto": 1.0 },
+    { "t": 13.55, "impacto": 0.6 },
+    { "t": 16.95, "impacto": 0.5 },
+    { "t": 19.25, "impacto": 0 },
+    { "t": 21.95, "impacto": 0.9 },
+    { "t": 26.08, "impacto": 0.5 },
+    { "t": 26.76, "impacto": 0.5 },
+    { "t": 27.45, "impacto": 0.6 },
+    { "t": 30.55, "impacto": 0.8 },
+    { "t": 34.0, "impacto": 1.0 }
+  ],
+  "legendas": [
+    { "a": 0.23, "b": 1.75, "txt": "Choveu na sua *fazenda*." },
+    { "a": 2.23, "b": 4.25, "txt": "E agora... vai *plantar capim*," },
+    { "a": 4.31, "b": 5.85, "txt": "ou *controlar o mato*?" },
+    { "a": 6.14, "b": 7.95, "txt": "Cada área tem uma *necessidade*." },
+    { "a": 8.07, "b": 9.77, "txt": "E o trabalho precisa acontecer" },
+    { "a": 9.83, "b": 11.05, "txt": "na *hora certa*." },
+    { "a": 11.19, "b": 13.55, "txt": "A *Liber Drones* faz *pulverização agrícola*" },
+    { "a": 13.59, "b": 15.13, "txt": "e distribuição de *sementes*" },
+    { "a": 15.15, "b": 16.85, "txt": "e outros *sólidos* com drones." },
+    { "a": 17.06, "b": 19.62, "txt": "*Tecnologia*, *precisão* e *agilidade*" },
+    { "a": 19.7, "b": 21.8, "txt": "a serviço da sua propriedade." },
+    { "a": 22.16, "b": 24.98, "txt": "Mais de *15 mil hectares* atendidos." },
+    { "a": 25.12, "b": 27.25, "txt": "Regularizada no *MAPA* e na *ANAC*." },
+    { "a": 27.65, "b": 28.75, "txt": "Vai *formar pasto*," },
+    { "a": 28.79, "b": 30.45, "txt": "ou precisa de uma *aplicação*?" },
+    { "a": 30.63, "b": 31.85, "txt": "Fale com a *Liber Drones*" },
+    { "a": 31.87, "b": 33.6, "txt": "e solicite seu *orçamento*." },
+    { "a": 34.04, "b": 35.95, "txt": "A *chuva não espera*." }
+  ]
+}
